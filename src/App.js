@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import ListenerComponent from "./components/ListenerComponent";
-import ModifierComponent from './components/ModifierComponent';
+import ModifierComponent from "./components/ModifierComponent";
 import { connect } from "@boostbank/react-stateful";
 
 class App extends Component {
@@ -26,7 +26,7 @@ class App extends Component {
           </h1>
         </header>
         <ListenerComponent />
-        <ModifierComponent/>
+        <ModifierComponent />
       </div>
     );
   }
