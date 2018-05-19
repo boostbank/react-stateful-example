@@ -1,5 +1,9 @@
 import React from "react";
-import { lookup, subModify } from "@boostbank/stateful/lib/substore";
+import {
+  lookup,
+  subModify,
+  subRollback
+} from "@boostbank/stateful/lib/substore";
 
 export default class SharedTextInput extends React.Component {
   render() {
@@ -14,6 +18,14 @@ export default class SharedTextInput extends React.Component {
             });
           }}
         />
+
+        <button
+          onClick={() => {
+            subRollback(lookup().input);
+          }}
+        >
+          Rollback
+        </button>
       </div>
     );
   }
