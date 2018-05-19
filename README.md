@@ -2,14 +2,14 @@
 
 ## Code Samples
 
-> 1. Install @boostbank/stateful && @boostbank/react-stateful
+> 1.  Install @boostbank/stateful && @boostbank/react-stateful
 
 ```sh
 npm i @boostbank/stateful --save
 npm i @boostbank/react-stateful --save
 ```
 
-> 2. Wrap GlobalState around your React Project
+> 2.  Wrap GlobalState around your React Project
 
 ```jsx
 // index.js
@@ -22,21 +22,22 @@ import { GlobalState } from "@boostbank/react-stateful";
 import { createStore } from "@boostbank/stateful";
 
 ReactDOM.render(
-  <GlobalState store={createStore({selectedName: "The first name in the store"})}>
+  <GlobalState
+    store={createStore({ selectedName: "The first name in the store" })}
+  >
     <App />
   </GlobalState>,
   document.getElementById("root")
 );
 registerServiceWorker();
-
 ```
 
-> 3. Connect components
+> 3.  Connect components
 
 ```jsx
 // components/ListenerComponent.jsx
 import React from "react";
-import { connect } from "@boostbank/react-stateful";
+import { connect, disconnect } from "@boostbank/react-stateful";
 
 export default class ListenerComponent extends React.Component {
   constructor() {
@@ -50,14 +51,16 @@ export default class ListenerComponent extends React.Component {
 
   componentDidMount() {}
 
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    disconnect(this);
+  }
   render() {
     return <div>{this.state.selectedName}</div>;
   }
 }
 ```
 
-> 4. Modify the state
+> 4.  Modify the state
 
 ```jsx
 // components/ModifierComponent.jsx
@@ -116,16 +119,106 @@ export default class ModifierComponent extends Component {
 }
 ```
 
+## Sub Store
+
+> 1.  Combine Substores (create all substores)
+
+```jsx
+import { createSubStore } from "@boostbank/stateful/lib/substore";
+
+export default function combineSubStores() {
+  createSubStore("input", {}, 10);
+}
+```
+
+> 2.  Connect to substore
+
+```jsx
+import React from "react";
+import { connectTo, disconnectFrom } from "@boostbank/react-stateful";
+import { lookup } from "@boostbank/stateful/lib/substore";
+
+export default class SharedComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sharedText: ""
+    };
+  }
+
+  componentDidMount() {
+    connectTo(this, lookup().input, store => {
+      this.setState({
+        sharedText: store.sharedText
+      });
+    });
+  }
+
+  componentWillUnmount() {
+    disconnectFrom(this, lookup().input);
+  }
+
+  render() {
+    return (
+      <div>
+        Shared: <p>{this.state.sharedText}</p>
+      </div>
+    );
+  }
+}
+```
+
+> 3.  Initiate Change
+
+```jsx
+import React from "react";
+import {
+  lookup,
+  subModify,
+  subRollback
+} from "@boostbank/stateful/lib/substore";
+
+export default class SharedTextInput extends React.Component {
+  render() {
+    return (
+      <div>
+        <input
+          type={"text"}
+          onChange={e => {
+            subModify(lookup().input, store => {
+              store.sharedText = e.target.value;
+              return store;
+            });
+          }}
+        />
+
+        <button
+          onClick={() => {
+            subRollback(lookup().input);
+          }}
+        >
+          Rollback
+        </button>
+      </div>
+    );
+  }
+}
+```
+
 ## Try it out!
 
 > Clone the repo
 
 > Install the dependencies
+
 ```sh
 npm install
 ```
+
 > Run the React app
+
 ```sh
 npm start
 ```
+
 > Enjoy
