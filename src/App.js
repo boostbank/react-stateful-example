@@ -4,6 +4,11 @@ import "./App.css";
 import ListenerComponent from "./components/ListenerComponent";
 import ModifierComponent from "./components/ModifierComponent";
 import { connect } from "@boostbank/react-stateful";
+import CombineSubStores from './combinations/CombineSubStores';
+import SharedComponent from './components/SharedComponent';
+import SharedTextInput from './components/SharedTextInput';
+
+CombineSubStores();
 
 class App extends Component {
   constructor() {
@@ -27,6 +32,13 @@ class App extends Component {
         </header>
         <ListenerComponent />
         <ModifierComponent />
+        <br/>
+        <br/>
+          <SharedTextInput/>
+        <br/>
+        <br/>
+        <SharedComponent/>
+        <SharedComponent/>
       </div>
     );
   }
