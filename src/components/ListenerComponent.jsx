@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "@boostbank/react-stateful";
+import { connect, disconnect } from "@boostbank/react-stateful";
 
 export default class ListenerComponent extends React.Component {
   constructor() {
@@ -13,7 +13,9 @@ export default class ListenerComponent extends React.Component {
 
   componentDidMount() {}
 
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    disconnect(this);
+  }
   render() {
     return <div>{this.state.selectedName}</div>;
   }

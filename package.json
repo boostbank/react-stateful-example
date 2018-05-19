@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@boostbank/react-stateful": "0.1.14",
+    "@boostbank/react-stateful": "0.1.15",
     "@boostbank/stateful": "0.1.23",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
