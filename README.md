@@ -269,7 +269,7 @@ export default class AsyncComponent extends React.Component {
 
 ```
 
-> You can also dot he same logic with `rollbackAsync` for global store. These functions `connectTo`, `subModifyAsync`, and `subRollback` for substores.
+> You can also do the same logic with `rollbackAsync` for global store. These functions `connectTo`, `subModifyAsync`, and `subRollback` for substores.
 
 ## Try it out!
 
