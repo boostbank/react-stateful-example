@@ -35,9 +35,9 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">
-            Welcome to react-stateful. Global State Name ->{" "}
-            {this.state.selectedName}
+            Welcome to react-stateful.
           </h1>
+          <code>{this.state.selectedName}</code>
         </header>
         <ListenerComponent />
         <ModifierComponent />

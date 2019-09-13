@@ -22,6 +22,6 @@ export default class ListenerComponent extends React.Component {
     disconnect(this);
   }
   render() {
-    return <div>{this.state.selectedName}</div>;
+    return <div><br/> <h2>Current name: {this.state.selectedName}</h2></div>;
   }
 }
