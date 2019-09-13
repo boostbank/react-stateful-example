@@ -33,9 +33,9 @@ export default class AsyncComponent extends React.Component {
       return store;
     }, ()=>{
       // When it is done setting state in the connect.
-      alert(`We did it! The state has been changed! ${this.state.selectedName}`);
+      alert(`We did it! The state has been changed! Name: ${this.state.selectedName} \n After you click OK React will re-render.`);
     });
-    alert(`State may or may not be updated yet... State: ${this.state.selectedName}`);
+    alert(`State may or may not be updated yet... Name: ${this.state.selectedName}`);
   };
 
   componentWillUnmount() {
@@ -44,7 +44,7 @@ export default class AsyncComponent extends React.Component {
   render() {
     return (
       <div>
-        Async Component
+        Async Component: 
         <button onClick={this.onButtonClick}>Change And Wait</button>
       </div>
     );
