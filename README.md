@@ -9,7 +9,9 @@ npm i @boostbank/stateful --save
 npm i @boostbank/react-stateful --save
 ```
 
-> 2.  Wrap GlobalState around your React Project
+## Using global state.
+
+1.  Wrap GlobalState around your React Project
 
 ```jsx
 // index.js
@@ -18,21 +20,18 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
-import { GlobalState } from "@boostbank/react-stateful";
 import { createStore } from "@boostbank/stateful";
 
+createStore({ selectedName: "The first name in the store" }, 5) // Creates a store with depth of 5 (stores 5 versions in memory);
+
 ReactDOM.render(
-  <GlobalState
-    store={createStore({ selectedName: "The first name in the store" })}
-  >
-    <App />
-  </GlobalState>,
+    <App />,
   document.getElementById("root")
 );
 registerServiceWorker();
 ```
 
-> 3.  Connect components
+2.  Connect components 
 
 ```jsx
 // components/ListenerComponent.jsx
@@ -40,16 +39,21 @@ import React from "react";
 import { connect, disconnect } from "@boostbank/react-stateful";
 
 export default class ListenerComponent extends React.Component {
-  constructor() {
-    super();
-    this.state = connect(this, store => {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      selectedName: ""
+    };
+  }
+
+  componentDidMount() {
+    connect(this, store => {
       this.setState({
         selectedName: store.selectedName
       });
     });
   }
-
-  componentDidMount() {}
 
   componentWillUnmount() {
     disconnect(this);
@@ -60,7 +64,7 @@ export default class ListenerComponent extends React.Component {
 }
 ```
 
-> 4.  Modify the state
+> 3.  Modify the state
 
 ```jsx
 // components/ModifierComponent.jsx
@@ -119,7 +123,7 @@ export default class ModifierComponent extends Component {
 }
 ```
 
-## Sub Store
+## Using Sub Store
 
 > 1.  Combine Substores (create all substores)
 
@@ -127,7 +131,7 @@ export default class ModifierComponent extends Component {
 import { createSubStore } from "@boostbank/stateful/lib/substore";
 
 export default function combineSubStores() {
-  createSubStore("input", {}, 10);
+  createSubStore("input", {});
 }
 ```
 
@@ -204,6 +208,8 @@ export default class SharedTextInput extends React.Component {
   }
 }
 ```
+
+## Async changes
 
 ## Try it out!
 

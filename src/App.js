@@ -7,18 +7,27 @@ import { connect } from "@boostbank/react-stateful";
 import CombineSubStores from './combinations/CombineSubStores';
 import SharedComponent from './components/SharedComponent';
 import SharedTextInput from './components/SharedTextInput';
+import AsyncComponent from "./components/AsyncComponent";
 
 CombineSubStores();
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = connect(this, store => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedName: ""
+    };
+  }
+
+
+  componentDidMount() {
+    connect(this, store => {
       this.setState({
         selectedName: store.selectedName
       });
     });
   }
+  
 
   render() {
     return (
@@ -26,9 +35,9 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">
-            Welcome to react-stateful. Global State Name ->{" "}
-            {this.state.selectedName}
+            Welcome to react-stateful.
           </h1>
+          <code>{this.state.selectedName}</code>
         </header>
         <ListenerComponent />
         <ModifierComponent />
@@ -39,6 +48,9 @@ class App extends Component {
         <br/>
         <SharedComponent/>
         <SharedComponent/>
+        <br/>
+        <br/>
+        <AsyncComponent/>
       </div>
     );
   }
