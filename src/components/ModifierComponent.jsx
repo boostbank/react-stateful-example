@@ -7,25 +7,20 @@ export default class ModifierComponent extends Component {
     this.state = {
       name: ""
     };
-    this.onNameChange = this.onNameChange.bind(this);
-    this.onChangeClick = this.onChangeClick.bind(this);
   }
 
   componentDidMount() {}
 
-  onChangeClick(e) {
+  onChangeClick = e=> {
     if (this.state.name.length > 0) {
       modify(state => {
         state.selectedName = this.state.name;
         return state;
       });
-      this.setState({
-        name: ""
-      });
     }
   }
 
-  onNameChange(e) {
+  onNameChange = e=> {
     this.setState({
       name: e.target.value
     });
@@ -42,6 +37,7 @@ export default class ModifierComponent extends Component {
         <button onClick={this.onChangeClick}>Change Name</button>
         <button
           onClick={() => {
+            // You can rollback versions. If you depth is greather than 0 when you create a store.
             rollback();
           }}
         >

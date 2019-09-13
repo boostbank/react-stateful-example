@@ -1,6 +1,6 @@
 import React from "react";
 import { connectTo, disconnectFrom } from "@boostbank/react-stateful";
-import { lookup } from "@boostbank/stateful/lib/substore";
+import { lookup } from "@boostbank/stateful";
 
 export default class SharedComponent extends React.Component {
   constructor(props) {
