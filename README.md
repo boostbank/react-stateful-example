@@ -11,7 +11,7 @@ npm i @boostbank/react-stateful --save
 
 ## Using global state.
 
-1.  Wrap GlobalState around your React Project
+1.  Create a global store.
 
 ```jsx
 // index.js
