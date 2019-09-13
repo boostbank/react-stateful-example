@@ -212,6 +212,8 @@ export default class SharedTextInput extends React.Component {
 }
 ```
 
+## Async changes
+
 ## Try it out!
 
 > Clone the repo
