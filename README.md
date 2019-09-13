@@ -20,15 +20,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
-import { GlobalState } from "@boostbank/react-stateful";
 import { createStore } from "@boostbank/stateful";
 
+createStore({ selectedName: "The first name in the store" }, 5) // Creates a store with depth of 5 (stores 5 versions in memory);
+
 ReactDOM.render(
-  <GlobalState
-    store={createStore({ selectedName: "The first name in the store" }, 5)}
-  >
-    <App />
-  </GlobalState>,
+    <App />,
   document.getElementById("root")
 );
 registerServiceWorker();
